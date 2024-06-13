@@ -1,36 +1,57 @@
-import React, { useState, useEffect, useMemo } from "react";
-import { View, Text, TouchableOpacity, Image, Modal, ScrollView } from "react-native";
-import { ProfileTabStyles, Style } from '../../../styles';
-import { Button, Spacing, Input, VectorIcon, ConfirmationAlert, PasswordInput } from '../../../components';
-import { SH, SF } from '../../../utils';
-import images from "../../../index";
-import RouteName from "../../../routes/RouteName";
-import { useTranslation } from "react-i18next";
-import { useTheme } from '@react-navigation/native';
+import React, {useState, useEffect, useMemo} from 'react';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  Modal,
+  ScrollView,
+} from 'react-native';
+import {ProfileTabStyles, Style} from '../../../styles';
+import {
+  Button,
+  Spacing,
+  Input,
+  VectorIcon,
+  ConfirmationAlert,
+  PasswordInput,
+} from '../../../components';
+import {SH, SF} from '../../../utils';
+import images from '../../../index';
+import RouteName from '../../../routes/RouteName';
+import {useTranslation} from 'react-i18next';
+import {useTheme} from '@react-navigation/native';
 
-const ProfileTab = (props) => {
-  const { Colors } = useTheme();
+const ProfileTab = props => {
+  const {Colors} = useTheme();
   const ProfileTabStyle = useMemo(() => ProfileTabStyles);
-  const { navigation } = props;
-  const { t } = useTranslation();
+  const {navigation} = props;
+  const {t} = useTranslation();
   const [modalVisible, setModalVisible] = useState(false);
   const [modalcontent, setmodalcontent] = useState(0);
   const [passwordVisibilityold, setpasswordVisibilityold] = useState(true);
   const [passwordVisibilitynew, setpasswordVisibilitynew] = useState(true);
-  const [passwordVisibilityconfirm, setPasswordVisibilityconfirm] = useState(true);
+  const [passwordVisibilityconfirm, setPasswordVisibilityconfirm] =
+    useState(true);
 
   const stateArray = {
-    Oldpassword: "",
-    Newpassword: "",
-    email: "",
-    Confirmpassword: "",
+    Oldpassword: '',
+    Newpassword: '',
+    email: '',
+    Confirmpassword: '',
     number: null,
   };
   const [state, setState] = useState(stateArray);
-  const onChangeText = (text) => {
-    if (text === 'Oldpassword') setpasswordVisibilityold(!passwordVisibilityold);
-    if (text === 'Newpassword') setpasswordVisibilitynew(!passwordVisibilitynew);
-    if (text === 'Confirmpassword') setPasswordVisibilityconfirm(!passwordVisibilityconfirm);
+  const onChangeText = text => {
+    if (text === 'Oldpassword') {
+      setpasswordVisibilityold(!passwordVisibilityold);
+    }
+    if (text === 'Newpassword') {
+      setpasswordVisibilitynew(!passwordVisibilitynew);
+    }
+    if (text === 'Confirmpassword') {
+      setPasswordVisibilityconfirm(!passwordVisibilityconfirm);
+    }
   };
   useEffect(() => {
     navigation.addListener('focus', () => {
@@ -42,32 +63,44 @@ const ProfileTab = (props) => {
   const [alertMessage, setAlertMessage] = useState('');
 
   var alertdata = {
-    'logout': t("Are_You_Sure_logout"),
-  }
+    logout: t('Are_You_Sure_logout'),
+  };
   const onoknutton = () => {
     navigation.navigate(RouteName.LOGIN_SCREEN);
-  }
+  };
   return (
     <View style={ProfileTabStyle.BackgroundWhite}>
       <View style={ProfileTabStyle.whilistminbody}>
         <ScrollView>
           <Spacing space={SH(30)} />
           <View style={ProfileTabStyle.ImagCenter}>
-            <Image style={ProfileTabStyle.ImageStyles} resizeMode='cover' source={images.ProfileImg} />
-            <Text style={ProfileTabStyle.profileUserName}>{t("Allison_Perry_Label")}</Text>
+            <Image
+              style={ProfileTabStyle.ImageStyles}
+              resizeMode="cover"
+              source={images.ProfileImg}
+            />
+            <Text style={ProfileTabStyle.profileUserName}>
+              {t('Allison_Perry_Label')}
+            </Text>
           </View>
           <View style={ProfileTabStyle.ProfileDetailesMinview}>
-            <Text style={ProfileTabStyle.EditProFile}>
-              {t("Edit_Profile")}
-            </Text>
+            <Text style={ProfileTabStyle.EditProFile}>{t('Edit_Profile')}</Text>
             <View style={ProfileTabStyle.PhoneNumberAndIcon}>
               <View style={ProfileTabStyle.BgWhiteShadow}>
                 <View>
-                  <Text style={ProfileTabStyle.PhoneNumberText}>{t("Phone_Number")}</Text>
-                  <Text style={ProfileTabStyle.DigitNumberText}>96034 56878</Text>
+                  <Text style={ProfileTabStyle.PhoneNumberText}>
+                    {t('Phone_Number')}
+                  </Text>
+                  <Text style={ProfileTabStyle.DigitNumberText}>
+                    96034 56878
+                  </Text>
                 </View>
                 <View>
-                  <TouchableOpacity onPress={() => { setModalVisible(true); setmodalcontent(1) }}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      setModalVisible(true);
+                      setmodalcontent(1);
+                    }}>
                     <View>
                       <VectorIcon
                         icon="EvilIcons"
@@ -83,11 +116,19 @@ const ProfileTab = (props) => {
             <View style={ProfileTabStyle.PhoneNumberAndIcon}>
               <View style={ProfileTabStyle.BgWhiteShadow}>
                 <View style={ProfileTabStyle.setpadiingtext}>
-                  <Text style={ProfileTabStyle.PhoneNumberText}>{t("Email_Text")}</Text>
-                  <Text style={ProfileTabStyle.DigitNumberText}>{t("Testemail")}</Text>
+                  <Text style={ProfileTabStyle.PhoneNumberText}>
+                    {t('Email_Text')}
+                  </Text>
+                  <Text style={ProfileTabStyle.DigitNumberText}>
+                    {t('Testemail')}
+                  </Text>
                 </View>
                 <View>
-                  <TouchableOpacity onPress={() => { setModalVisible(true); setmodalcontent(2) }}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      setModalVisible(true);
+                      setmodalcontent(2);
+                    }}>
                     <View>
                       <VectorIcon
                         icon="EvilIcons"
@@ -103,11 +144,17 @@ const ProfileTab = (props) => {
             <View style={ProfileTabStyle.PhoneNumberAndIcon}>
               <View style={ProfileTabStyle.BgWhiteShadow}>
                 <View>
-                  <Text style={ProfileTabStyle.PhoneNumberText}>{t("Password_Text")}</Text>
+                  <Text style={ProfileTabStyle.PhoneNumberText}>
+                    {t('Password_Text')}
+                  </Text>
                   <Text style={ProfileTabStyle.DigitNumberText}>******</Text>
                 </View>
                 <View>
-                  <TouchableOpacity onPress={() => { setModalVisible(true); setmodalcontent(3) }}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      setModalVisible(true);
+                      setmodalcontent(3);
+                    }}>
                     <View>
                       <VectorIcon
                         icon="EvilIcons"
@@ -121,9 +168,12 @@ const ProfileTab = (props) => {
               </View>
             </View>
             <Spacing space={SH(20)} />
-            <TouchableOpacity onPress={() => navigation.navigate(RouteName.PAYMENT_SCREEN)}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate(RouteName.YOUR_FRIEND)}>
               <View style={ProfileTabStyle.IconAndTextFlex}>
-                <Text style={ProfileTabStyle.LogOutView}>{t("Payment_Label")}</Text>
+                <Text style={ProfileTabStyle.LogOutView}>
+                  {t('Your_Friend_Label')}
+                </Text>
                 <VectorIcon
                   icon="AntDesign"
                   size={SF(27)}
@@ -132,9 +182,12 @@ const ProfileTab = (props) => {
                 />
               </View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate(RouteName.YOUR_FRIEND)}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate(RouteName.SETTING_SCREEN)}>
               <View style={ProfileTabStyle.IconAndTextFlex}>
-                <Text style={ProfileTabStyle.LogOutView}>{t("Your_Friend_Label")}</Text>
+                <Text style={ProfileTabStyle.LogOutView}>
+                  {t('Setting_Text')}
+                </Text>
                 <VectorIcon
                   icon="AntDesign"
                   size={SF(27)}
@@ -143,24 +196,17 @@ const ProfileTab = (props) => {
                 />
               </View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate(RouteName.SETTING_SCREEN)}>
+            <TouchableOpacity
+              onPress={() => {
+                setAlertVisible(true);
+                setAlertMessage(alertdata.logout);
+              }}>
               <View style={ProfileTabStyle.IconAndTextFlex}>
-                <Text style={ProfileTabStyle.LogOutView}>{t("Setting_Text")}</Text>
+                <Text style={ProfileTabStyle.LogOutView}>{t('Log_Out')}</Text>
                 <VectorIcon
                   icon="AntDesign"
                   size={SF(27)}
                   name="arrowright"
-                  color={Colors.theme_background}
-                />
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => {
-              setAlertVisible(true);
-              setAlertMessage(alertdata.logout);
-            }}>
-              <View style={ProfileTabStyle.IconAndTextFlex}>
-                <Text style={ProfileTabStyle.LogOutView}>{t("Log_Out")}</Text>
-                <VectorIcon icon="AntDesign" size={SF(27)} name="arrowright"
                   color={Colors.theme_background}
                 />
               </View>
@@ -171,13 +217,16 @@ const ProfileTab = (props) => {
               animationType="slide"
               transparent={true}
               visible={modalVisible}
-              onRequestClose={() => { setModalVisible(!modalVisible) }}
-            >
+              onRequestClose={() => {
+                setModalVisible(!modalVisible);
+              }}>
               <View style={ProfileTabStyle.CenteredView}>
                 <View style={ProfileTabStyle.ModalView}>
                   <View style={ProfileTabStyle.ShadowStyleModalTwo}>
                     <View style={ProfileTabStyle.AllPaddingModal}>
-                      <TouchableOpacity style={ProfileTabStyle.IconClose} onPress={() => setModalVisible(!modalVisible)}>
+                      <TouchableOpacity
+                        style={ProfileTabStyle.IconClose}
+                        onPress={() => setModalVisible(!modalVisible)}>
                         <VectorIcon
                           icon="AntDesign"
                           size={SF(25)}
@@ -186,107 +235,154 @@ const ProfileTab = (props) => {
                         />
                       </TouchableOpacity>
                       <View>
-                        {modalcontent === 1 ?
-                          <Text style={ProfileTabStyle.ModalText}>{t("Change_Phone_Number")}</Text>
-                          :
-                          modalcontent === 2 ?
-                            <Text style={ProfileTabStyle.ModalText}>{t("Change_Email")}</Text>
-                            :
-                            <Text style={ProfileTabStyle.ModalText}>{t("Change_Your_Password")}</Text>
-                        }
+                        {modalcontent === 1 ? (
+                          <Text style={ProfileTabStyle.ModalText}>
+                            {t('Change_Phone_Number')}
+                          </Text>
+                        ) : modalcontent === 2 ? (
+                          <Text style={ProfileTabStyle.ModalText}>
+                            {t('Change_Email')}
+                          </Text>
+                        ) : (
+                          <Text style={ProfileTabStyle.ModalText}>
+                            {t('Change_Your_Password')}
+                          </Text>
+                        )}
                         <Spacing space={SH(10)} />
 
-                        {modalcontent === 1 ?
+                        {modalcontent === 1 ? (
                           <Input
-                            onChangeText={(text) => setState({ ...state, number: text })}
+                            onChangeText={text =>
+                              setState({...state, number: text})
+                            }
                             value={state.number}
                             placeholder="9603456878"
                             placeholderTextColor={Colors.gray_text_color}
                             inputType="numeric"
                             inputStyle={Style.Inputplace}
                           />
-                          :
-                          modalcontent === 2 ?
-                            <View>
-                              <Input
-                                onChangeText={(text) => setState({ ...state, email: text })}
-                                value={state.email}
-                                placeholder={t("Exam_Email_Text")}
-                                placeholderTextColor={Colors.gray_text_color}
+                        ) : modalcontent === 2 ? (
+                          <View>
+                            <Input
+                              onChangeText={text =>
+                                setState({...state, email: text})
+                              }
+                              value={state.email}
+                              placeholder={t('Exam_Email_Text')}
+                              placeholderTextColor={Colors.gray_text_color}
+                              inputStyle={Style.Inputplace}
+                            />
+                          </View>
+                        ) : modalcontent === 3 ? (
+                          <>
+                            <View style={Style.InputViewWidth}>
+                              <Spacing space={SH(10)} />
+                              <PasswordInput
+                                name={passwordVisibilityold ? 'eye-off' : 'eye'}
+                                label={t('Old_Password')}
+                                placeholder={t('Old_Password')}
+                                textContentType="newPassword"
+                                secureTextEntry={passwordVisibilityold}
+                                onChangeText={text =>
+                                  setState({...state, Oldpassword: text})
+                                }
+                                value={state.Oldpassword}
+                                onPress={() => {
+                                  onChangeText('Oldpassword');
+                                }}
                                 inputStyle={Style.Inputplace}
                               />
+                              <Spacing space={SH(5)} />
+                              <PasswordInput
+                                name={passwordVisibilitynew ? 'eye-off' : 'eye'}
+                                label={t('New_Password')}
+                                placeholder={t('New_Password')}
+                                textContentType="newPassword"
+                                secureTextEntry={passwordVisibilitynew}
+                                onChangeText={text =>
+                                  setState({...state, Newpassword: text})
+                                }
+                                value={state.Newpassword}
+                                enablesReturnKeyAutomatically
+                                inputStyle={Style.Inputplace}
+                                onPress={() => {
+                                  onChangeText('Newpassword');
+                                }}
+                              />
+                              <Spacing space={SH(5)} />
+                              <PasswordInput
+                                name={
+                                  passwordVisibilityconfirm ? 'eye-off' : 'eye'
+                                }
+                                label={t('Conform_Password')}
+                                placeholder={t('Conform_Password')}
+                                textContentType="newPassword"
+                                secureTextEntry={passwordVisibilityconfirm}
+                                onChangeText={text =>
+                                  setState({...state, Confirmpassword: text})
+                                }
+                                value={state.Confirmpassword}
+                                enablesReturnKeyAutomatically
+                                inputStyle={Style.Inputplace}
+                                onPress={() => {
+                                  onChangeText('Confirmpassword');
+                                }}
+                              />
                             </View>
-                            :
-                            modalcontent === 3 ?
-                              <>
-                                <View style={Style.InputViewWidth}>
-                                  <Spacing space={SH(10)} />
-                                  <PasswordInput
-                                    name={passwordVisibilityold ? 'eye-off' : 'eye'}
-                                    label={t("Old_Password")}
-                                    placeholder={t("Old_Password")}
-                                    textContentType="newPassword"
-                                    secureTextEntry={passwordVisibilityold}
-                                    onChangeText={(text) => setState({ ...state, Oldpassword: text })}
-                                    value={state.Oldpassword}
-                                    onPress={() => { onChangeText("Oldpassword") }}
-                                    inputStyle={Style.Inputplace}
-                                  />
-                                  <Spacing space={SH(5)} />
-                                  <PasswordInput
-                                    name={passwordVisibilitynew ? 'eye-off' : 'eye'}
-                                    label={t("New_Password")}
-                                    placeholder={t("New_Password")}
-                                    textContentType="newPassword"
-                                    secureTextEntry={passwordVisibilitynew}
-                                    onChangeText={(text) => setState({ ...state, Newpassword: text })}
-                                    value={state.Newpassword}
-                                    enablesReturnKeyAutomatically
-                                    inputStyle={Style.Inputplace}
-                                    onPress={() => { onChangeText("Newpassword") }}
-                                  />
-                                  <Spacing space={SH(5)} />
-                                  <PasswordInput
-                                    name={passwordVisibilityconfirm ? 'eye-off' : 'eye'}
-                                    label={t("Conform_Password")}
-                                    placeholder={t("Conform_Password")}
-                                    textContentType="newPassword"
-                                    secureTextEntry={passwordVisibilityconfirm}
-                                    onChangeText={(text) => setState({ ...state, Confirmpassword: text })}
-                                    value={state.Confirmpassword}
-                                    enablesReturnKeyAutomatically
-                                    inputStyle={Style.Inputplace}
-                                    onPress={() => { onChangeText("Confirmpassword") }}
-                                  />
-                                </View>
-                                <Spacing space={SH(10)} />
-                              </>
-                              :
-                              <Text style={ProfileTabStyle.ModalText}>{t("Are_You_Sure")}</Text>
-                        }
+                            <Spacing space={SH(10)} />
+                          </>
+                        ) : (
+                          <Text style={ProfileTabStyle.ModalText}>
+                            {t('Are_You_Sure')}
+                          </Text>
+                        )}
 
-                        {modalcontent === 1 || modalcontent === 2 || modalcontent === 3 ?
+                        {modalcontent === 1 ||
+                        modalcontent === 2 ||
+                        modalcontent === 3 ? (
                           <View style={ProfileTabStyle.ButtonsetModleTwoButton}>
                             <View style={ProfileTabStyle.Marginright}>
-                              <Button onPress={() => setModalVisible(!modalVisible)}
-                                buttonTextStyle={{ color: Colors.white_text_color }}
-                                title={t("Ok")} />
+                              <Button
+                                onPress={() => setModalVisible(!modalVisible)}
+                                buttonTextStyle={{
+                                  color: Colors.white_text_color,
+                                }}
+                                title={t('Ok')}
+                              />
                             </View>
                             <View style={ProfileTabStyle.Marginright}>
-                              <Button buttonStyle={ProfileTabStyle.SingleButtonStyles} buttonTextStyle={ProfileTabStyle.SingleButtonText} title={t("Cancel_Button")} onPress={() => setModalVisible(!modalVisible)} />
-                            </View>
-                          </View>
-                          :
-                          <View style={ProfileTabStyle.ButtonsetModleTwoButton}>
-                            <View style={ProfileTabStyle.MarginRightView}>
-                              <Button title={t("Log_Out")} onPress={() => navigation.navigate(RouteName.LOGIN_SCREEN)} />
-                            </View>
-                            <View style={ProfileTabStyle.MarginRightView}>
-                              <Button title={t("Cancel_Button")} onPress={() => setModalVisible(!modalVisible)} buttonStyle={ProfileTabStyle.SingleButtonStyles} buttonTextStyle={ProfileTabStyle.SingleButtonText}
+                              <Button
+                                buttonStyle={ProfileTabStyle.SingleButtonStyles}
+                                buttonTextStyle={
+                                  ProfileTabStyle.SingleButtonText
+                                }
+                                title={t('Cancel_Button')}
+                                onPress={() => setModalVisible(!modalVisible)}
                               />
                             </View>
                           </View>
-                        }
+                        ) : (
+                          <View style={ProfileTabStyle.ButtonsetModleTwoButton}>
+                            <View style={ProfileTabStyle.MarginRightView}>
+                              <Button
+                                title={t('Log_Out')}
+                                onPress={() =>
+                                  navigation.navigate(RouteName.LOGIN_SCREEN)
+                                }
+                              />
+                            </View>
+                            <View style={ProfileTabStyle.MarginRightView}>
+                              <Button
+                                title={t('Cancel_Button')}
+                                onPress={() => setModalVisible(!modalVisible)}
+                                buttonStyle={ProfileTabStyle.SingleButtonStyles}
+                                buttonTextStyle={
+                                  ProfileTabStyle.SingleButtonText
+                                }
+                              />
+                            </View>
+                          </View>
+                        )}
                       </View>
                     </View>
                   </View>
@@ -299,9 +395,11 @@ const ProfileTab = (props) => {
             modalVisible={alertVisible}
             setModalVisible={setAlertVisible}
             onPressCancel={() => setAlertVisible(!alertVisible)}
-            onPress={() => { setAlertVisible(!alertVisible), onoknutton() }}
-            cancelButtonText={t("Cancel_Button")}
-            buttonText={t("Ok")}
+            onPress={() => {
+              setAlertVisible(!alertVisible), onoknutton();
+            }}
+            cancelButtonText={t('Cancel_Button')}
+            buttonText={t('Ok')}
             cancelButtonTextStatus={true}
           />
         </ScrollView>

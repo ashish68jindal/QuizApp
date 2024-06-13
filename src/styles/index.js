@@ -10,10 +10,4 @@ export * from './PracticeMainStyle';
 export * from './QuestionsStyle';
 export * from './ExamReviewStyle';
 export * from './AnswerStyle';
-export * from './PaymentScreenStyle';
 export * from './YourFriendStyle';
-
-
-
-
-
